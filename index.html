@@ -1,0 +1,135 @@
+
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>مدیریت پروژه‌های برنامه‌نویسی</title>
+        <link rel="stylesheet" href="./css/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    </head>
+    <body>
+        <!-- LOGIN -->
+        <div id="loginPage" class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                <div class="logo"><i class="fas fa-code"></i></div>
+                <h1>استریم پروژه‌ها</h1>
+                <p>ورود به پنل مدیریت پروژه‌های برنامه‌نویسی</p>
+                </div>
+                <div class="input-group">
+                <label><i class="fas fa-user"></i> نام کاربری</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-user-circle"></i>
+                    <input type="text" id="loginUsername" placeholder="نام کاربری">
+                </div>
+                </div>
+                <div class="input-group">
+                <label><i class="fas fa-lock"></i> رمز عبور</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-key"></i>
+                    <input type="password" id="loginPassword" placeholder="رمز عبور">
+                </div>
+                </div>
+                <button id="doLoginBtn" class="btn-primary"><i class="fas fa-sign-in-alt"></i> ورود به داشبورد</button>
+            </div>
+        </div>
+
+        <!-- DASHBOARD -->
+        <div id="dashboardPage" class="hidden">
+        <div class="dashboard-wrapper">
+            <aside class="sidebar">
+            <div class="user-info">
+                <div class="avatar"><i class="fas fa-user-astronaut"></i></div>
+                <strong id="sidebarUsername">کاربر</strong>
+                <div><span id="sidebarRoleBadge" class="role-badge role-user">کاربر عادی</span></div>
+            </div>
+            <div class="nav-menu">
+                <button data-tab="projects" class="nav-item active"><i class="fas fa-tasks"></i> پروژه‌ها</button>
+                <button data-tab="users" id="usersTabBtn" class="nav-item"><i class="fas fa-users"></i> مدیریت کاربران</button>
+                <button data-tab="notifications" id="notificationsTabBtn" class="nav-item"><i class="fas fa-bell"></i> اعلان‌ها<span id="notificationBadge" class="notification-badge hidden">0</span></button>
+                <button data-tab="settings" id="settingsTabBtn" class="nav-item"><i class="fas fa-shield-alt"></i> تنظیمات</button>
+            </div>
+            <button id="sidebarLogout" class="nav-item logout-sidebar"><i class="fas fa-power-off"></i> خروج از حساب</button>
+            </aside>
+
+            <main class="main-content">
+            <div class="dashboard-header">
+                <h2>داشبورد <span id="pageTitle">پروژه‌ها</span></h2>
+            </div>
+
+            <!-- Projects -->
+            <div id="projectsTab">
+                <div class="stats-grid">
+                <div class="stat-card"><i class="fas fa-folder-open"></i> <strong id="totalProjectsCount">0</strong><br>کل پروژه‌ها</div>
+                <div class="stat-card"><i class="fas fa-clock"></i> پروژه‌های جاری</div>
+                <div class="stat-card"><i class="fas fa-dollar-sign"></i> مجموع مبالغ</div>
+                </div>
+
+                <div class="projects-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-list"></i> لیست پروژه‌ها</h3>
+                    <button id="addProjectBtn" class="btn btn-success"><i class="fas fa-plus"></i> افزودن پروژه جدید</button>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table id="projectsTable">
+                    <thead>
+                        <tr><th>نام پروژه</th><th>توضیحات</th><th>تاریخ شروع</th><th>تاریخ تحویل</th><th>مبلغ</th><th>کارفرما</th><th>شماره</th><th>عملیات</th></td>
+                    </thead>
+                    <tbody id="projectsList"></tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+
+            <!-- Users -->
+            <div id="usersTab" class="hidden">
+                <div class="projects-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-user-shield"></i>مدیریت کاربران</h3>
+                    <button id="createUserBtn" class="btn btn-primary-small"><i class="fas fa-user-plus"></i> ساخت اکانت جدید</button>
+                </div>
+                <div class="user-table-container">
+                    <table id="usersManagementTable">
+                    <thead><tr><th>نام کاربری</th><th>نقش</th><th>تغییر نقش</th><th>حذف</th></tr></thead>
+                    <tbody id="usersListBody"></tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+
+            <!-- اعلان‌ها TAB -->
+            <div id="notificationsTab" class="hidden">
+            <div class="notifications-container">
+                <div class="section-header">
+                <h3><i class="fas fa-bell"></i> اعلان‌ها و پیام‌ها</h3>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button id="markAllReadBtn" class="mark-all-btn"><i class="fas fa-check-double"></i> خواندن همه</button>
+                    <button id="clearNotificationsBtn" class="btn btn-danger"><i class="fas fa-trash"></i> پاک کردن همه</button>
+                </div>
+                </div>
+                <div id="notificationList" class="notification-list">
+                </div>
+            </div>
+            </div>
+
+            <!-- Settings -->
+            <div id="settingsTab" class="hidden">
+                <div class="projects-section">
+                <h3><i class="fas fa-lock"></i>تنظیمات</h3>
+                <p>مدیریت کل سیستم: پاک کردن تمام پروژه‌ها، تغییرات امنیتی</p>
+                <button id="clearAllProjectsBtn" class="btn btn-danger" style="margin-top: 1rem;"><i class="fas fa-trash-alt"></i> حذف کلیه پروژه‌ها (تأیید می‌خواهد)</button>
+                <hr style="margin: 1rem 0; border-color: var(--border);">
+                </div>
+            </div>
+            </main>
+        </div>
+        </div>
+    </body>
+    <script src="./js/app.js"></script>
+</html>
+
