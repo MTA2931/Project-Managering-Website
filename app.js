@@ -8,8 +8,8 @@ const STORAGE_NOTIFICATIONS = "stream_notifications";
 
 // Default admin account
 const defaultAdmin = {
-username: "MTA2931",
-password: "Mani@1392",
+username: "admin",
+password: "admin123",
 role: "management"
 };
 
